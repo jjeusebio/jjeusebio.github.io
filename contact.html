@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit-no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <script>@page import="com.e2speru.java.mail.JavaEmail;"</script>
+        <script>@page import="javax.mail.MessagingException;"</script>
+        <script>
+            
+            String message=null;
+            String status=null;
+    
+            if(request.getParameter("btnSend")!=null){
+                
+                JavaEmail javaEmail = new JavaEmail();
+                javaEmail.setMailServerProperties();
+        
+		String emailSubject = "Contact Form from e2speru.com";
+		String emailBody = "";
+		if (request.getParameter("txtFirstName") != null) {
+			emailBody = "First Name: " + request.getParameter("txtFirstName")
+					+ "<br>";
+		}
+		if (request.getParameter("txtLastName") != null) {
+			emailBody = emailBody + "Last Name: "
+					+ request.getParameter("txtLastName") + "<br>";
+		}
+		if (request.getParameter("txtEmail") != null) {
+			emailBody = emailBody + "Email: "
+					+ request.getParameter("txtEmail") + "<br>";
+		}
+                if (request.getParameter("txtSubject") != null) {
+			emailBody = emailBody + "Subject: "
+					+ request.getParameter("txtSubject") + "<br>";
+		}
+		if (request.getParameter("txtMessage") != null) {
+			emailBody = emailBody + "Message: " + request.getParameter("txtMessage")
+					+ "<br>";
+		}
+		javaEmail.createEmailMessage(emailSubject,emailBody);
+		try {
+			javaEmail.sendEmail();
+			status = "success";
+			message = "Email sent Successfully!";
+		} catch (MessagingException me) {
+			status = "error";
+			message = "Error in Sending Email!";
+		}
+                
+            }
+            
+        </script>
+        <!-- Navigation -->
+        <div class="container mb-5" style="height: 60px">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top py-2" style="background-color: #e3f2fd">
+            <div class="container px-0">
+            <a class="navbar-brand" href="index.html">Electrical Engineering Services</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="navbar-nav ml-auto text-center my-2 my-lg-0">
+                    <a class="nav-item nav-link" href="cv.html">CV</a>                                
+                    <a class="nav-item nav-link" href="consulting.html">Consulting</a>
+                    <a class="nav-item nav-link" href="research.html">Research</a>                
+                    <a class="nav-item nav-link" href="teaching.html">Teaching</a>                            
+                    <a class="nav-item nav-link" href="contact.html">Contact</a>               
+                    <a class="nav-item nav-link" href="subscribe.html">Subscribe</a>                
+                </div>
+            </div>
+            </div>
+        </nav>
+        </div>
+        
+        <!-- Sidebar and contenido -->
+      
+        <div class="container" style="">
+        
+        <div class="row">
+            <div class="Sidebar sticky ml-0 px-0 text-center col-md-3" style="height:600px;">
+            
+                <div class="container pt-2" style="height: 240px">
+                    <img src="image/profile.jpg" class="img-thumbnail" alt="" style="border-radius: 100%;">
+                </div>    
+                <div class="text-muted">
+                    <h4>Juan José</h4>
+                    <h4>Eusebio Jurado</h4>
+                    <h5>Electrical Engineer</h5>
+                </div>
+                <div class="mt-5">
+                    <a href="https://www.linkedin.com/in/juanjoeusebio" target="_blank">
+                        <img src="image/linkedin.png" alt="" style="border-radius: 10%">
+                    </a>   
+                </div>   
+            </div>
+
+            <div class="container" style="width: 600px; height: 700px">
+                <h5 align="left">Contact us! Enter your personal data and writte your questions in the message.</h5>
+                    <form action="" method="post" class="mt-3">
+                        <div class="form-group">
+                            <label>First name:</label>
+                            <input type="text" name="txtFirstName" class="form-control required" 
+                                   title="Please enter your first name" aria-required="true" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last name:</label>
+                            <input type="text" name="txtLastName" class="form-control required"
+                                   title="Please enter your last name" aria-required="true" required>
+                        </div>    
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" name="txtEmail" class="form-control required email"
+                                   title="Please enter your email" aria-required="true" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject:</label>
+                            <input type="text" name="txtSubject" class="form-control required"
+                                   title="Please enter one subject" aria-required="true" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message:</label>
+                            <textarea class="form-control" name="txtMessage"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-danger" type="submit" name="btnSend" style="clear: both;">Send</button>
+                        </div>
+                        <script>
+                            if (null != message) {
+                            out.println("<div class='" + status + "'>"
+                            + message + "</div>");
+                            }
+			</script>
+                    </form>        
+            </div>
+        </div>
+        
+        </div>
+        
+    
+        <!-- footer -->
+        <footer class="footer fixed py-3 text-muted" style="background-color: #e3f2fd">
+            <div class="container">
+                <h7>©2020 Developed by Juan José Eusebio</h7>
+            </div>
+        </footer>
+        
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+    </body>
+</html>
